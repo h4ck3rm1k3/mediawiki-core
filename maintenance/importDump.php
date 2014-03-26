@@ -240,7 +240,7 @@ TEXT;
 		} elseif ( preg_match( '/\.7z$/', $filename ) ) {
 			$filename = 'mediawiki.compress.7z://' . $filename;
 		}
-
+        print ("going to open $filename");
 		$file = fopen( $filename, 'rt' );
 		return $this->importFromHandle( $file );
 	}

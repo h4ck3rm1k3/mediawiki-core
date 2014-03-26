@@ -87,3 +87,32 @@ http://lists.wikimedia.org/mailman/listinfo/mediawiki-announce (low traffic)
 http://lists.wikimedia.org/mailman/listinfo/mediawiki-l (site admin support)
 
 http://lists.wikimedia.org/mailman/listinfo/wikitech-l (development)
+
+
+----
+Command Line Install
+====================
+
+from https://www.mediawiki.org/wiki/Manual:Installing_MediaWiki
+
+Mysql:
+ create database wikidb;
+ grant index, create, select, insert, update, delete, alter, lock tables on wikidb.* to 'wikiuser'@'localhost' identified by 'password';
+
+If needed, you can run the command-line installer (CLI) : php maintenance/install.php.
+
+Usage: php install.php [--conf|--confpath|--dbname|--dbpass|--dbpassfile|--dbpath|--dbport|--dbprefix|--dbserver|--dbtype|--dbuser|--env-checks|--globals|--help|--installdbpass|--installdbuser|--lang|--memory-limit|--pass|--passfile|--profiler|--quiet|--scriptpath|--server|--wiki] <name> <admin>
+
+Example :
+php5 maintenance/install.php test test --pass password --dbname wikidb --dbpass password
+
+Export from Wikipedia :
+
+Run the special export routine on wikipedia:
+https://en.wikipedia.org/wiki/Special:Export
+
+Import Dump :
+Usage: php importDump.php [--conf|--dbpass|--dbuser|--debug|--dry-run|--globals|--help|--image-base-path|--memory-limit|--namespaces|--no-updates|--profiler|--quiet|--report|--server|--uploads|--wiki] [file]
+php5 ./maintenance/importDump.php --dbuser wikiuser --dbpass password  --server http://en.wikipedia.org   wikidb ~/Downloads/Wikipedia-20140326095838.xml
+php5 rebuildrecentchanges.php
+php5 importImages.php ../path_to/images
